@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manager</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<nav class="navbar navbar-inverse" >
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href=""><font color="#E0F8F7">The Final Touch Security, LLC&nbsp&nbsp&nbsp&nbsp</font></a>
+      </div>
+      <div>
+        <ul class="nav navbar-nav"> 
+       	  <li><%= link_to "Call List", call_lists_path() %></li>
+          <li><%= link_to "Customers", customers_path() %></li> 
+          <li><%= link_to "Employees", manage_users_path() %></li>
+          <li><%= link_to "Active Jobs", show_active_jobs_path(), 'data-no-turbolink' => true %></li> 
+          <li><%= link_to "Today's Jobs", show_todays_jobs_path() %></li>
+          <li><%= link_to "Billing", billing_index_path() %></li>        
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <% if user_signed_in? %>
+            <li><%= link_to "Log Out", destroy_user_session_path(), method: :delete %></li>
+          <% else %>
+            <li><%= link_to "Log In", new_user_session_path() %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<%= render "layouts/flash_messages.html.erb" %>
+<%= yield %>
+
+
+
+
+
+</body>
+</html>

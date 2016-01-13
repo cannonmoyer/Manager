@@ -1,0 +1,18 @@
+<h1>Today's Jobs</h1>
+
+<table class="table table-bordered">
+	<tr>
+		<th>Name</th> <th>Account Number</th> <th>Date</th> <th>Time</th> <th>Description</th> <th>Edit</th> <th>Delete</th>
+	</tr>	
+	<% @jobs.each do |f| %>
+		<tr>
+			<td><%= f.customer.name %></td>
+			<td><%= f.customer.account_number %></td>
+			<td><%= f.date %></td>
+			<td><%= f.time %></td>
+			<td><%= f.description %></td>
+			<td width="125"><%= link_to "", edit_job_path(f),  class: "glyphicon glyphicon-pencil" %> </td>
+			<td><%= link_to "", job_path(f),  class: "glyphicon glyphicon-trash", method: :delete %> </td>
+		</tr>
+	<% end %>
+</table>

@@ -1,0 +1,80 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<h2>Create Customer</h2>
+				<%= form_for(@customer, class: 'form-horizontal') do |f| %>
+					<fieldset>
+						<div class = "form-group">
+							<%= f.label :name %>
+							<%= f.text_field :name, class: "form-control" %>
+						</div>
+					
+						<div class = "form-group">
+							<%= f.label :company %>
+							<%= f.text_field :company, class: "form-control" %>
+						</div>
+					
+						<div class = "form-group">
+						<%= f.label :account_number %>
+						<%= f.text_field :account_number, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+						<%= f.label :phone_one %>
+						<%= f.text_field :phone_one, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+						<%= f.label :phone_two %>
+						<%= f.text_field :phone_two, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+						<%= f.label :phone_three %>
+						<%= f.text_field :phone_three, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+						<%= f.label :phone_four %>
+						<%= f.text_field :phone_four, class: "form-control" %>
+						</div>
+						
+						<div class = "form-group">
+						<%= f.label :fax %>
+						<%= f.text_field :fax, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+						<%= f.label :email %>
+						<%= f.text_field :email, class: "form-control" %>
+						</div>
+						
+						<div class = "form-group">
+						<%= f.label :street %>
+						<%= f.text_field :street, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+						<%= f.label :city %>
+						<%= f.text_field :city, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">	
+						<%= f.label :state %>
+						<%= f.select :state, ['Ms', 'Tn'], class: "form-control"%>
+						</div>
+
+
+						<div class = "form-group">
+						<%= f.label :zip %>
+						<%= f.text_field :zip, class: "form-control" %>
+						</div>
+						
+						<div class = "form-group">
+						<%= f.submit(class: "btn btn-primary btn-sm") %>
+						</div>
+				<% end %> 
+			
+		</div>
+	</div>
+</div>

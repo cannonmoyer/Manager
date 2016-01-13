@@ -1,0 +1,22 @@
+<center><h1>All Users</h1></center>
+
+<br>
+<p>
+	<li><%= link_to "New User", new_manage_user_path(), class: "btn btn-primary btn-sm" %></li>
+</p>
+<table class="table table-bordered">
+	<tr>
+		<th>Username</th>  
+		<th>Level</th>
+		<th>Edit</th>
+		<th>Jobs</th>
+	</tr>	
+	<% @users.each do |f| %>
+		<tr>
+			<td><%= f.email %></td>
+			<td><%= f.level %></td>	
+			<td><%= link_to "", edit_manage_user_path(f), class: "glyphicon glyphicon-pencil" %></td>	
+			<td><%= link_to "Jobs", user_job_path(f), class: "glyphicon glyphicon-search" %></td>		
+		</tr>
+	<% end %>
+</table>

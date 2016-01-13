@@ -1,0 +1,16 @@
+<h1>Jobs</h1>
+
+<table class="table table-bordered">
+	<tr>
+		<th>Name</th> <th>Account Number</th> <th>Description</th> <th width="10">Edit</th> <th width="10">Delete</th> 
+	</tr>	
+	<% @jobs.each do |f| %>
+		<tr>
+			<td><%= f.customer.name %></td>
+			<td><%= f.customer.account_number %></td>
+			<td><%= f.description %></td>
+			<td><%= link_to "", edit_job_path(f), class: "glyphicon glyphicon-pencil" %></td> 
+			<td><%= link_to "", job_path(f), class: "glyphicon glyphicon-trash", method: :delete %></td>
+		</tr>
+	<% end %>
+</table>

@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2015-12-30
+  time: MyString
+  address: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  description: MyText
+  work_completed: MyText
+  billing_information: MyText
+  special_job_instructions: MyText
+  notes: MyText
+  status: MyString
+
+two:
+  date: 2015-12-30
+  time: MyString
+  address: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  description: MyText
+  work_completed: MyText
+  billing_information: MyText
+  special_job_instructions: MyText
+  notes: MyText
+  status: MyString
