@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 			<h2>Edit Customer</h2>
-				<%= form_for(@customer, class: 'form-horizontal') do |f| %>
+				<%= form_for(@customer, :remote => true, class: 'form-horizontal', :html => { :id => "form_correct" }) do |f| %>
 					<fieldset>
 						<div class = "form-group">
-							<%= f.label :name %>
+							<%= f.label "Name (cannot be blank)" %>
 							<%= f.text_field :name, class: "form-control" %>
 						</div>
 					
@@ -20,7 +20,7 @@
 						</div>
 
 						<div class = "form-group">
-						<%= f.label :phone_one %>
+						<%= f.label "Phone One (xxx-xxx-xxxx ext 1234)" %>
 						<%= f.text_field :phone_one, class: "form-control" %>
 						</div>
 
@@ -71,7 +71,7 @@
 						</div>
 						
 						<div class = "form-group">
-						<%= f.submit(class: "btn btn-primary btn-sm") %>
+						<%= f.submit(class: "btn btn-primary btn-sm", :id => "action") %>
 						</div>
 				<% end %> 
 		</div>

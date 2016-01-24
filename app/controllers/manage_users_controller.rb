@@ -1,31 +1,53 @@
 class ManageUsersController < ApplicationController
+	before_action :authenticate_user!
+	
 	def index
-		@users = User.all
+		user = User.find(current_user)
+		if user.level == "Admin"
+			@users = User.all
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 
 	def new
-		@user = User.new
+		user = User.find(current_user)
+		if user.level == "Admin"
+			@user = User.new
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 
 	def edit
-		@user = User.find(params[:id])
+		user = User.find(current_user)
+		if user.level == "Admin"
+			@user = User.find(params[:id])
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 
 	def update
-		@user = User.find(params[:id])
-		@user.update!(params.require(:user).permit(:email, :level, :password, :password_confirmation))
-		redirect_to users_url
+		user = User.find(current_user)
+		if user.level == "Admin"
+			@user = User.find(params[:id])
+			@user.update!(params.require(:user).permit(:email, :level, :password, :password_confirmation))
+			redirect_to users_url
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 
 	def create
-		#if user_signed_in? 
-		#if user_signed_in and current_user.level == "Admin"?
+		user = User.find(current_user)
+		if user.level == "Admin"
 			User.create!(params.require(:user).permit(:email, :level, :password, :password_confirmation))	
 			redirect_to users_url
-		#else 
-			#redirect_to users_url
-		#end	
-		#User.create!(email: 'root@thefinaltouchsecurity.com', level: 'Admin', password: 'password', password_confirmation: 'password')
+		else
+			redirect_to show_todays_jobs_path
+		end
+	
 	end
 
 

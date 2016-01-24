@@ -1,30 +1,28 @@
 class JobsController < ApplicationController
-	def index
-		#user = User.find(current_user)
-		#if user.level == "Admin"        
-			@jobs = current_user.jobs.where(status: 'Scheduled').all
-		#else
-
-		#nd
-	end
-
+	before_action :authenticate_user!
+	
 	def todays_jobs
-		@jobs = current_user.jobs.where(status: 'Scheduled').all
+		@jobs = current_user.jobs.where(status: 'Scheduled & Released').all.order("date ASC").order("time ASC")
 		render "jobs"
 	end
 
 	def active_jobs
-		@jobs = Job.where.not(status: "Completed But Not Billed").where.not(status: "Completed And Billed")
+		user = User.find(current_user)
+		if user.level == "Admin"
+			@jobs = Job.where.not(status: "Completed But Not Billed").where.not(status: "Completed And Billed").where.not(status: "Complete").all.order("date ASC").order("time ASC")
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 
 	def search
 		k = params[:keyword].downcase
 		if k == "empty"
-			@jobs = Job.all
+			@jobs = Job.all.order("date ASC").order("time ASC")
 		else
 			@jobs = []
 			Job.all.each do |j|
-				if j.id.to_s.downcase.include? k or j.customer.name.downcase.include? k or j.customer.phone_one.include? k or j.status.downcase.include? k
+				if (j.customer.name != nil and j.customer.name.downcase.include? k) or (j.customer.phone_one != nil and j.customer.phone_one.include? k) or (j.city != nil and j.city.downcase.include? k) or (j.customer.city != nil and j.customer.city.downcase.include? k) or (j.date != nil and j.date.to_s.include? k) or (j.status != nil and j.status.downcase.include? k) or (j.description != nil and j.description.downcase.include? k)
 					@jobs << j
 				end
 			end
@@ -36,39 +34,87 @@ class JobsController < ApplicationController
 	end
 
 	def create
-		@customer = Customer.find(params[:id])
-		@job = @customer.jobs.create!(status:'Waiting To Be Scheduled')
-		redirect_to edit_job_path(@job)
+		u = User.find(current_user)
+		if u.level == "Admin"
+			@customer = Customer.find(params[:id])
+			@job = @customer.jobs.create(status:'Waiting To Be Scheduled')
+			@job.user = u
+			@job.save!
+			redirect_to edit_job_path(@job)
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 
 	def edit
-		@job = Job.find(params[:id])
-		@users = User.all
+		@cur_user = User.find(current_user)
+		if @cur_user.level == "Admin"
+			@job = Job.find(params[:id])
+			session[:edit_job] = @job.id
+			@users = User.all
+		else
+			job = Job.find(params[:id])
+			if job.user == @cur_user
+				@job = job
+				session[:edit_job] = @job.id
+				@users = User.all
+			else
+				redirect_to show_todays_jobs_path	
+			end
+		end
+		
 	end
 
 	def update
 		@user = User.find(params[:job][:user_id])
-		@job = Job.find(params[:id])	
-		@job.update(params.require(:job).permit(:date, :time, :address, :city, :state, :zip, :special_job_instructions, :description, :work_completed, :billing_information, :notes, :status))
-		@job.user = @user
-		@job.save!
-		redirect_to customers_url
+		@job = Job.find(params[:id])
+		begin
+			Date.parse(params[:job][:date])	unless params[:job][:date] == ""
+			@job.update(params.require(:job).permit(:date, :time, :time_sensitive, :address, :city, :state, :zip, :special_job_instructions, :description, :work_completed, :billing_information, :notes, :status))
+			
+			if @job.valid?	
+				flash[:notice] = "Successfully Updated Job"
+				@job.user = @user
+				@job.save!
+				render "layouts/success"
+			else
+				flash[:error] = "Error Updating Job!"
+				render "layouts/fail"
+			end
+		rescue
+			flash[:error] = "Error Updating Job!"
+			render "layouts/fail"
+		end
 	end
 
 	def destroy
-		@job = Job.find(params[:id])
-		@job.destroy
-		redirect_to customers_url
+		user = User.find(current_user)
+		if user.level == "Admin"
+			job = Job.find(params[:id])
+			job.destroy
+			redirect_to customers_url
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 
 	def jobs
-		@customer = Customer.find(params[:id])
-		@jobs = @customer.jobs.all
-
+		user = User.find(current_user)
+		if user.level == "Admin"
+			@customer = Customer.find(params[:id])
+			@jobs = @customer.jobs.all.order("date ASC").order("time ASC")
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 
 	def user_jobs
-		@user = User.find(params[:id])
-		@jobs = @user.jobs.all
+		user = User.find(current_user)
+		if user.level == "Admin"
+			@user = User.find(params[:id])
+			@jobs = @user.jobs.all.order("date ASC").order("time ASC")
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 end

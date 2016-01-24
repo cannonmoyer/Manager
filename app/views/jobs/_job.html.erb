@@ -1,7 +1,35 @@
+<% if job.time_sensitive? %>
+<tr bgcolor="#F77E7E">
+<% else %>
 <tr>
-	<td><%= job.id %></td>
+<% end %>
 	<td><%= job.customer.name %></td>
-	<td><%= job.customer.email %></td>
 	<td><%= job.customer.phone_one %></td>
+	<td><%= 
+			if job.city.nil? or job.city.to_s.empty?
+				job.customer.city
+			else
+				job.city
+			end
+	%></td>
+	<td><%= job.user.email %></td>
+	<td><%= if job.date.nil? or job.date.to_s.empty?
+				job.date
+			else
+				job.date.strftime('%a %d %b %Y') 
+			end
+	%></td>
+	<td><%= 
+		if job.time.to_s.length == 4
+			job.time = job.time.to_s.insert(2, ":")
+		elsif job.time.to_s.length == 3
+			job.time = job.time.to_s.insert(1, ":")
+		else
+			job.time
+		end
+	 %></td>
 	<td><%= job.status %></td>
+	<td><%= job.description %></td>
+	<td><%= link_to "", edit_job_path(job),  class: "glyphicon glyphicon-pencil" %></td>
+	<td><%= link_to "", job_path(job), data:{confirm: 'Are you sure?'},  class: "glyphicon glyphicon-trash", method: :delete %></td>
 </tr>

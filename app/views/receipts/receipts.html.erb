@@ -1,0 +1,14 @@
+<center><h1>Receipts</h1></center>
+
+<table class="table table-bordered">
+	<tr>
+		<th width="25">Email</th>  
+		<th>Description/Information</th>
+	</tr>	
+	<% @receipts.each do |f| %>
+		<tr>
+			<td><%= f.email %></td>
+			<td><%= f.information %></td>		
+		</tr>
+	<% end %>
+</table>

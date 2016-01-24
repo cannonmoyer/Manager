@@ -1,16 +1,16 @@
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 			<h2>Add To Call List</h2>
-				<%= form_for(@call_list) do |f|  %>
+				<%= form_for(@call_list, :remote => true, :html => { :id => "form_correct" }) do |f|  %>
 					<fieldset>
 						<div class = "form-group">
-							<%= f.label :name %>
+							<%= f.label "Name (cannot be blank)" %>
 							<%= f.text_field :name, class: "form-control" %>
 						</div>
 						
 						<div class = "form-group">
-							<%= f.label :phone %>
+							<%= f.label "Phone (xxx-xxx-xxxx ext 1234)" %>
 							<%= f.text_field :phone, class: "form-control" %>
 						</div>
 						
@@ -20,7 +20,7 @@
 						</div>
 
 						<div class = "form-group">
-							<%= f.submit("Create Record", class: "btn btn-primary btn-sm") %>
+							<%= f.submit("Create Record", class: "btn btn-primary btn-sm", :id => "action") %>
 						</div>
 					</fieldset>
 				<% end %> 

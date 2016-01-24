@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Manager</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -14,12 +15,14 @@
       </div>
       <div>
         <ul class="nav navbar-nav"> 
-       	  <li><%= link_to "Call List", call_lists_path() %></li>
-          <li><%= link_to "Customers", customers_path() %></li> 
-          <li><%= link_to "Employees", manage_users_path() %></li>
-          <li><%= link_to "Active Jobs", show_active_jobs_path(), 'data-no-turbolink' => true %></li> 
-          <li><%= link_to "Today's Jobs", show_todays_jobs_path() %></li>
-          <li><%= link_to "Billing", billing_index_path() %></li>        
+          <% if user_signed_in? and current_user.level == "Admin" %>
+          	<li><%= link_to "Call List", call_lists_path() %></li>
+            <li><%= link_to "Customers", customers_path() %></li> 
+            <li><%= link_to "Employees", manage_users_path() %></li>
+            <li><%= link_to "Active Jobs", show_active_jobs_path() %></li> 
+            <li><%= link_to "Billing", billing_index_path() %></li> 
+          <% end %>
+          <li><%= link_to "Today's Jobs", show_todays_jobs_path() %></li>     
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>

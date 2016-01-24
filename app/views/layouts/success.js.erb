@@ -1,0 +1,5 @@
+$("#flash_messages").html('<%= escape_javascript(render "layouts/flash_messages") %>');
+
+if(document.getElementById("action") != null){
+	$("#action").prop('disabled', false);
+}

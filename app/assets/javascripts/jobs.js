@@ -1,6 +1,10 @@
 
 $(document).ready(function(){
-	
+	$("#form_correct").submit(function(){
+    	$("#action").prop('disabled', true);
+    	}
+    );//end click
+    
     $("#search").keyup(
     	//search
 		
@@ -40,3 +44,4 @@ function debounce(func, wait, immediate) {
 		if (callNow) func.apply(context, args);
 	};
 };
+

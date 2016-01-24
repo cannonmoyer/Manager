@@ -1,4 +1,5 @@
-Billing<div class="container">
+<center><h1>Billing</h1></center>
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 			<h2>Customer Information</h2>
@@ -18,11 +19,11 @@ Billing<div class="container">
 	</div>
 </div>
 <hr>
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 			<h2>Job I.D. # <%= @job.id %></h2>
-			<%= form_for(@job, class: 'form-horizontal', :url => billing_path) do |f| %>
+			<%= form_for(@job, class: 'form-horizontal', :url => billing_path, :remote => true, :html => { :id => "form_correct" }) do |f| %>
 				<fieldset>
 					<div class = "form-group">
 						<%= f.label :employee %>
@@ -30,14 +31,22 @@ Billing<div class="container">
 					</div>
 
 					<div class = "form-group">
-						<%= f.label :date %>
+						<%= f.label "Date YYYY-MM-DD" %>
 						<%= f.text_field :date, class: "form-control" %>
 					</div>
 					
 					<div class = "form-group">
 						<%= f.label :time %>
-						<%= f.select :time, ['7:30 AM', '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', 
-							'12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM'], class: "form-control"%>
+						<%= f.select :time, ['','730','745','800','815','830','845','900','915','930','945','1000',
+							'1015', '1030','1045', '1100','1115','1130','1145',
+							'1200','1215','1230','1245','1300','1315','1330','1345','1400','1415','1430',
+							'1445','1500','1515', '1530','1545','1600','1615','1630','1645','1700','1715',
+							'1730','1745','1800'], class: "form-control"%>
+					</div>
+
+					<div class = "form-group">
+						<%= f.label :time_sensitive %>
+						<%= f.check_box :time_sensitive %>
 					</div>
 					
 					<div class = "form-group">
@@ -87,11 +96,11 @@ Billing<div class="container">
 
 					<div class = "form-group">
 						<%= f.label :status %>
-						<%= f.select :status, ['Waiting To Be Scheduled', 'Scheduled', 'Incomplete', 'Completed But Not Billed', 'Completed And Billed'], class: "form-control"%>
+						<%= f.select :status, ['Waiting To Be Scheduled', 'Scheduled', 'Scheduled & Released' 'Incomplete', 'Completed But Not Billed', 'Complete'], class: "form-control"%>
 					</div>
 
 					<div class = "form-group">
-						<%= f.submit(class: "btn btn-primary btn-sm") %>
+						<%= f.submit(class: "btn btn-primary btn-sm", :id => "action") %>
 					</div>
 				</fieldset>
 			<% end %> 

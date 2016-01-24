@@ -1,47 +1,77 @@
 class CallListsController < ApplicationController
+	before_action :authenticate_user!
 
 	def index
-		@call_lists = CallList.all
+		user = User.find(current_user)
+		if user.level == "Admin"
+			@call_lists = CallList.all
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 
 	def new
-		@call_list = CallList.new
+		user = User.find(current_user)
+		if user.level == "Admin"
+			@call_list = CallList.new
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 
 	def create
-		c = CallList.create(params.require(:call_list).permit(:name, :phone, :description))	
-
-		if c.valid?
-			flash[:notice] = "Successfully Created Record"
-			redirect_to call_lists_path
-			
+		user = User.find(current_user)
+		if user.level == "Admin"
+			c = CallList.create(params.require(:call_list).permit(:name, :phone, :description))	
+			if c.valid?
+				flash[:notice] = "Successfully Created Record"
+				render :js => "window.location = '/call_lists'"
+			else
+				flash[:error] = "Error Creating Record"
+				render "layouts/fail"
+			end
 		else
-			flash[:error] = "Error Creating Record"
-			redirect_to new_call_list_path
+			redirect_to show_todays_jobs_path
 		end
 	end
 
 	def edit
-		@call_list = CallList.find(params[:id])
+		user = User.find(current_user)
+		if user.level == "Admin"
+			@call_list = CallList.find(params[:id])
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 
 	def update
-		@call_list = CallList.find(params[:id])	
-		@call_list.update!(params.require(:call_list).permit(:name, :phone, :description))
+		user = User.find(current_user)
+		if user.level == "Admin"
 
-		if @call_list.valid?
-			flash[:notice] = "Successfully Updated Record"
-			redirect_to call_lists_path
+			@call_list = CallList.find(params[:id])	
+			@call_list.update(params.require(:call_list).permit(:name, :phone, :description))
+
+			if @call_list.valid?
+				flash[:notice] = "Successfully Updated Record"
+				render :js => "window.location = '/call_lists'"
+			else
+				flash[:error] = "Error Updating Record"
+				render "layouts/fail"
+			end
 		else
-			flash[:error] = "Error Updating Record"
-			redirect_to edit_call_list_path(@call_list)
+			redirect_to show_todays_jobs_path
 		end
 	end
 
 	def destroy
-		@call_list = CallList.find(params[:id])
-		@call_list.destroy
-		redirect_to call_lists_path
+		user = User.find(current_user)
+		if user.level == "Admin"
+			@call_list = CallList.find(params[:id])
+			@call_list.destroy
+			redirect_to call_lists_path
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 
 end

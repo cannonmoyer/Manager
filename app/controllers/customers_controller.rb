@@ -1,48 +1,79 @@
 class CustomersController < ApplicationController
+	before_action :authenticate_user!
+	
 	def index
-		respond_to do |format|
-      		format.html
-	      	#format.json {render json: ReminderDatatable.new(view_context)}
-	      	format.json {render json: CustomerDatatable.new(view_context)}
-	    end
+		user = User.find(current_user)
+		if user.level == "Admin"
+			respond_to do |format|
+	      		format.html
+		      	#format.json {render json: ReminderDatatable.new(view_context)}
+		      	format.json {render json: CustomerDatatable.new(view_context)}
+		    end
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 
 	def edit
-		@customer = Customer.find(params[:id])
+		user = User.find(current_user)
+		if user.level == "Admin"
+			@customer = Customer.find(params[:id])
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 
 	def update
-		@customer = Customer.find(params[:id])	
-		@customer.update(params.require(:customer).permit(:name, :company, :account_number, :phone_one, :phone_two, :phone_three, :phone_four, :fax, :email, :street, :city, :state, :zip))
-		
-		if @customer.valid?
-			flash[:notice] = "Successfully Updated Customer"
-			redirect_to customers_url
+		user = User.find(current_user)
+		if user.level == "Admin"
+			@customer = Customer.find(params[:id])	
+			@customer.update(params.require(:customer).permit(:name, :company, :account_number, :phone_one, :phone_two, :phone_three, :phone_four, :fax, :email, :street, :city, :state, :zip))
+			
+			if @customer.valid?
+				flash[:notice] = "Successfully Updated Customer"
+				render :js => "window.location = '/customers'"
+			else
+				flash[:error] = "Error Updating Customer"
+				render "layouts/fail"
+			end
 		else
-			flash[:error] = "Error Updating Customer"
-			redirect_to edit_customer_path(@customer)
+			redirect_to show_todays_jobs_path
 		end
 	end
 
 	def new
-		@customer = Customer.new
+		user = User.find(current_user)
+		if user.level == "Admin"
+			@customer = Customer.new
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 
 	def create
-		c = Customer.create(params.require(:customer).permit(:name, :company, :account_number, :phone_one, :phone_two, :phone_three, :phone_four, :fax, :email, :street, :city, :state, :zip))	
-		if c.valid?
-			flash[:notice] = "Successfully Created Customer"
-			redirect_to customers_path
+		user = User.find(current_user)
+		if user.level == "Admin"
+			c = Customer.create(params.require(:customer).permit(:name, :company, :account_number, :phone_one, :phone_two, :phone_three, :phone_four, :fax, :email, :street, :city, :state, :zip))	
+			if c.valid?
+				flash[:notice] = "Successfully Created Customer"
+				render :js => "window.location = '/customers'"
+			else
+				flash[:error] = "Error Creating Customer"
+				render "layouts/fail"
+			end
 		else
-			flash[:error] = "Error Creating Customer"
-			redirect_to new_customer_path
+			redirect_to show_todays_jobs_path
 		end
 	end
 
 	def destroy
-		customer = Customer.find(params[:id])
-		customer.jobs.destroy_all
-		customer.destroy
-		redirect_to customers_url
+		user = User.find(current_user)
+		if user.level == "Admin"
+			customer = Customer.find(params[:id])
+			customer.destroy
+			redirect_to customers_url
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 end

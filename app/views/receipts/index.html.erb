@@ -1,0 +1,14 @@
+<center><h1>Call List</h1></center>
+
+
+<table class="table table-bordered">
+	<tr>
+		<th>Email</th> <th>Information</th>  
+	<% @receipts.each do |f| %>
+		<tr>
+			<td><%= f.email %></td>
+			<td><%= f.information %></td>			
+		</tr>
+	<% end %>
+</table>
+

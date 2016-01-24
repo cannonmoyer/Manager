@@ -1,24 +1,52 @@
-<h1>Jobs</h1>
+<center><h1>Jobs</h1></center>
 
 <table class="table table-bordered">
 	<tr>
-		<th>Name</th> 
-		<th>Account Number</th> 
-		<th>Date</th> 
-		<th>Time</th> 
-		<th>Description</th> 
+		<th width="150">Name</th> 
+		<th width="150">Phone</th>
+		<th width="100">City</th> 
+		<th width="100">Employee</th>
+		<th width="125">Date</th> 
+		<th width="75">Time</th> 
+		<th width="700">Description</th> 
 		<th width="10">Edit</th>
-		<th width="10">Delete</th>
+		<th width="10">Delete</th>	
 	</tr>	
 	<% @jobs.each do |f| %>
+		<% if f.time_sensitive? %>
+		<tr bgcolor="#F77E7E">
+		<% else %>
 		<tr>
+		<% end %>
 			<td><%= f.customer.name %></td>
-			<td><%= f.customer.account_number %></td>
-			<td><%= f.date %></td>
-			<td><%= f.time %></td>
+			<td><%= f.customer.phone_one %></td>
+			<td><%= 
+					if f.city.nil? or f.city.to_s.empty?
+						f.customer.city
+					else
+						f.city
+					end
+			%></td>
+			<td><%= f.user.email %></td>
+			<td><%= 
+				if f.date.nil? or f.date.to_s.empty?
+					f.date
+				else
+					f.date.strftime('%a %d %b %Y') 
+				end
+			%></td>
+			<td><%= 
+				if f.time.to_s.length == 4
+					f.time = f.time.to_s.insert(2, ":")
+				elsif f.time.to_s.length == 3
+					f.time = f.time.to_s.insert(1, ":")
+				else
+					f.time
+				end
+			%></td>
 			<td><%= f.description %></td>
-			<td><%= link_to "", edit_job_path(f),  class: "glyphicon glyphicon-pencil" %> 
-			<td><%= link_to "", job_path(f),  class: "glyphicon glyphicon-trash", method: :delete %></td>
+			<td><%= link_to "", edit_job_path(f),  class: "glyphicon glyphicon-pencil" %></td> 
+			<td><%= link_to "", job_path(f), data:{confirm: 'Are you sure?'}, class: "glyphicon glyphicon-trash", method: :delete %></td>
 		</tr>
 	<% end %>
 </table>

@@ -13,7 +13,7 @@
 			<td><%= f.phone %></td>
 			<td><%= f.description %></td>
 			<td><%= link_to "", edit_call_list_path(f), class: "glyphicon glyphicon-pencil" %> </td>
-			<td><%= link_to "", call_list_path(f), class: "glyphicon glyphicon-trash",  method: :delete %></td>
+			<td><%= link_to "", call_list_path(f), data:{confirm: 'Are you sure?'}, class: "glyphicon glyphicon-trash",  method: :delete %></td>
 		</tr>
 	<% end %>
 </table>
