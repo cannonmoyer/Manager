@@ -27,7 +27,7 @@ class ReceiptsController < ApplicationController
 				render "layouts/fail"
 			end
 		else
-			flash[:error] = "Error Sending Email!"
+			flash[:error] = "Error Creating Receipt!"
 			render "layouts/fail"
 		end
 	end
