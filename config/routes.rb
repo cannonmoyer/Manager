@@ -34,7 +34,10 @@ Rails.application.routes.draw do
   get 'receipts/:id/receipts', to: 'receipts#receipts', as: 'job_receipts'
   resources :receipts
 
+  get 'pages/:id/pages', to: 'pages#pages', as: 'job_pages'
+  resources :pages
   
+  resources :forms
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

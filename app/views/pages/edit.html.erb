@@ -1,0 +1,39 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-5">      
+        
+	<%= form_for(@page, :html => {class: "form-inline", :id => "page_form" }) do |f| %>
+	
+		<div class = "form-group">
+			<%= f.label :name %>
+			<%= f.text_field :name, class: "form-control"  %>	
+		</div>
+				
+			<%= f.hidden_field :content, :id => "content_hidden" %>
+				<div class = "form-group">		
+			<%= f.submit(:id => "action", class: "btn btn-primary btn-sm") %>
+		</div>
+	
+	<% end %> 
+</div>
+</div>
+</div>
+</br>
+
+<center>	
+	<canvas id="can" width="1200" height="1200"></canvas>
+	<ul id="menu">
+	  <li><button id="green" onclick="color(this)"></button></li>
+	  <li><button id="blue" onclick="color(this)"></button></li>
+	  <li><button id="red" onclick="color(this)"></button></li>
+	  <li><button id="yellow" onclick="color(this)"></button></li>
+	  <li><button id="orange" onclick="color(this)"></button></li>
+	  <li><button id="black" onclick="color(this)"></button></li>
+	  <li><button id="white" onclick="color(this)"></button></li>
+	  <li><button id="clr" onclick="erase()">Clear</button></li>
+	</ul>     
+</center>
+
+    
+        
+  

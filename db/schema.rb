@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122190604) do
+ActiveRecord::Schema.define(version: 20160415045930) do
 
   create_table "call_lists", force: :cascade do |t|
     t.string   "name"
@@ -39,6 +39,12 @@ ActiveRecord::Schema.define(version: 20160122190604) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "forms", force: :cascade do |t|
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "jobs", force: :cascade do |t|
     t.date     "date"
     t.string   "address"
@@ -61,6 +67,16 @@ ActiveRecord::Schema.define(version: 20160122190604) do
 
   add_index "jobs", ["customer_id"], name: "index_jobs_on_customer_id"
   add_index "jobs", ["user_id"], name: "index_jobs_on_user_id"
+
+  create_table "pages", force: :cascade do |t|
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "job_id"
+    t.string   "name"
+  end
+
+  add_index "pages", ["job_id"], name: "index_pages_on_job_id"
 
   create_table "receipts", force: :cascade do |t|
     t.text     "information"

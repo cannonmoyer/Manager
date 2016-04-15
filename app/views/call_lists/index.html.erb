@@ -6,9 +6,10 @@
 </p>
 <table class="table table-bordered">
 	<tr>
-		<th>Name</th> <th>Phone</th> <th>Description</th> <th width="10">Edit</th> <th width="10">Delete</th> 
+		<th>Created At</th> <th>Name</th> <th>Phone</th> <th>Description</th> <th width="10">Edit</th> <th width="10">Delete</th> 
 	<% @call_lists.each do |f| %>
 		<tr>
+			<td><%= f.created_at %></td>
 			<td><%= f.name %></td>
 			<td><%= f.phone %></td>
 			<td><%= f.description %></td>

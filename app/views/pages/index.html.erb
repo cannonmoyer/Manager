@@ -1,0 +1,16 @@
+<center><h1>Pages</h1></center>
+
+<table class="table table-bordered">
+	<tr>
+		<th width="25">Name</th>  
+		<th>view</th>
+		<th>delete</th>
+	</tr>	
+	<% @pages.each do |f| %>
+		<tr>
+			<td><%= f.name %></td>	
+		</tr>
+	<% end %>
+</table>
+
+

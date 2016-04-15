@@ -4,7 +4,7 @@ class CallListsController < ApplicationController
 	def index
 		user = User.find(current_user)
 		if user.level == "Admin"
-			@call_lists = CallList.all
+			@call_lists = CallList.all.order("created_at ASC")
 		else
 			redirect_to show_todays_jobs_path
 		end

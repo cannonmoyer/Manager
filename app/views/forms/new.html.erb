@@ -1,0 +1,38 @@
+<center>
+	<canvas id="mon_can" width="1800" height="900"></canvas>
+	<ul id="menu">
+	  <li><button id="green" onclick="color(this)"></button></li>
+	  <li><button id="blue" onclick="color(this)"></button></li>
+	  <li><button id="red" onclick="color(this)"></button></li>
+	  <li><button id="yellow" onclick="color(this)"></button></li>
+	  <li><button id="orange" onclick="color(this)"></button></li>
+	  <li><button id="black" onclick="color(this)"></button></li>
+	  <li><button id="white" onclick="color(this)"></button></li>
+	</ul>     
+</center>
+
+    
+        <input type="button" value="save" id="btn" size="30" onclick="myCanvas()">
+        <input type="button" value="clear" id="clr" size="23" onclick="erase()">
+        <br><br>
+	<%= form_for(@form, :html => { :id => "page_form" }) do |f| %>
+	
+					
+			
+				
+			<%= f.hidden_field :content, :id => "content_hidden" %>
+						
+			<%= f.submit(:id => "action") %>
+				
+	<% end %> 
+
+
+<img id="form" alt="The Scream" src="/images/Sentrynet.jpg" width="220" height="">
+<script>
+function myCanvas() {
+    var c = document.getElementById("mon_can");
+    var ctx = c.getContext("2d");
+    var img = document.getElementById("form");
+    ctx.drawImage(img,0,0);
+}
+</script>

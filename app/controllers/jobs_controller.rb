@@ -18,10 +18,10 @@ class JobsController < ApplicationController
 	def search
 		k = params[:keyword].downcase
 		if k == "empty"
-			@jobs = Job.all.order("date ASC").order("time ASC")
+			@jobs = Job.where.not(status: "Completed But Not Billed").where.not(status: "Completed And Billed").where.not(status: "Complete").all.order("date ASC").order("time ASC")
 		else
 			@jobs = []
-			Job.all.each do |j|
+			Job.where.not(status: "Completed But Not Billed").where.not(status: "Completed And Billed").where.not(status: "Complete").all.each do |j|
 				if (j.customer.name != nil and j.customer.name.downcase.include? k) or (j.customer.phone_one != nil and j.customer.phone_one.include? k) or (j.city != nil and j.city.downcase.include? k) or (j.customer.city != nil and j.customer.city.downcase.include? k) or (j.date != nil and j.date.to_s.include? k) or (j.status != nil and j.status.downcase.include? k) or (j.description != nil and j.description.downcase.include? k)
 					@jobs << j
 				end
@@ -66,6 +66,7 @@ class JobsController < ApplicationController
 	end
 
 	def update
+		
 		@user = User.find(params[:job][:user_id])
 		@job = Job.find(params[:id])
 		begin
@@ -112,7 +113,7 @@ class JobsController < ApplicationController
 		user = User.find(current_user)
 		if user.level == "Admin"
 			@user = User.find(params[:id])
-			@jobs = @user.jobs.all.order("date ASC").order("time ASC")
+			@jobs = @user.jobs.where.not(status: "Completed But Not Billed").where.not(status: "Completed And Billed").where.not(status: "Complete").all.order("date ASC").order("time ASC")
 		else
 			redirect_to show_todays_jobs_path
 		end
