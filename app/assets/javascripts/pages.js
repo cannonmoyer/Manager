@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    
-    init();
-
+    try{ 
+        init();
+    }catch(err){}
     $("#page_form").submit(function() {
          var dataURL = canvas.toDataURL();
          document.getElementById("content_hidden").value = dataURL; 
@@ -21,12 +21,22 @@ $(document).ready(function(){
         y = 2;
     
     function init() {
-
+        
         canvas = document.getElementById('can');
 
         ctx = canvas.getContext("2d");
         w = canvas.width;
         h = canvas.height;
+
+        canvas.addEventListener("touchmove", function (e) {
+            mobilexy('move', e)
+        }, false);
+        canvas.addEventListener("touchstart", function (e) {
+            mobilexy('down', e)
+        }, false);
+        canvas.addEventListener("touchleave", function (e) {
+            mobilexy('up', e)
+        }, false);
     
         canvas.addEventListener("mousemove", function (e) {
             findxy('move', e)
@@ -43,6 +53,7 @@ $(document).ready(function(){
         var img = new Image();
         img.src = document.getElementById("content_hidden").value;
         ctx.drawImage(img,0,0);
+
     }
     
     function color(obj) {
@@ -87,8 +98,7 @@ $(document).ready(function(){
     function erase() {
         var m = confirm("Are you sure?");
         if (m) {
-            ctx.clearRect(0, 0, w, h);
-            document.getElementById("canvasimg").style.display = "none";
+            ctx.clearRect(0, 0, w, h);  
         }
     }
     
@@ -128,4 +138,41 @@ $(document).ready(function(){
                 draw();
             }
         }
+    }
+
+    function mobilexy(res, e) {
+        e.preventDefault();
+        var touch = event.touches[0];
+        if (res == 'down') {
+            prevX = currX;
+            prevY = currY;
+            currX = touch.pageX - canvas.offsetLeft;
+            currY = touch.pageY - canvas.offsetTop;
+    
+            flag = true;
+            dot_flag = true;
+            if (dot_flag) {
+                ctx.beginPath();
+                ctx.fillStyle = x;
+                ctx.fillRect(currX, currY, 2, 2);
+                ctx.closePath();
+                dot_flag = false;
+            }
+        }
+        if (res == 'up' || res == "out") {
+            flag = false;
+        }
+        if (res == 'move') {
+            if (flag) {
+                prevX = currX;
+                prevY = currY;
+                currX = touch.pageX - canvas.offsetLeft;
+                currY = touch.pageY - canvas.offsetTop;
+                draw();
+            }
+        }
+    }
+
+    function scrollUp(){
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
     }
