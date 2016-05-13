@@ -45,15 +45,15 @@ Rails.application.configure do
   #Action Mailer
   config.action_mailer.perform_deliveries = true
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              'p3plcpnl0334.prod.phx3.secureserver.net',
-    port:                 465,
-    domain:               'finaltouchsecurity.com',
-    user_name:            'receipts@finaltouchsecurity.com',
-    password:             'pKMM_{wno^TU',
-    authentication:       'plain',
+  #config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.smtp_settings = {
+   # address:              'p3plcpnl0334.prod.phx3.secureserver.net',
+   # port:                 465,
+   # domain:               'finaltouchsecurity.com',
+   # user_name:            'receipts@finaltouchsecurity.com',
+   # password:             'pKMM_{wno^TU',
+   # authentication:       'plain',
     #enable_starttls_auto: true 
-    ssl: true }
+   # ssl: true }
 
 end
