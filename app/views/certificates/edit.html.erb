@@ -1,0 +1,71 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<h2>Edit Form</h2>
+					<div class = "form-group">
+							<label>Name</label>
+							<input type="text" value="<%= @certificate.customer.name%>" class="form-control" readonly>
+						</div>
+						<div class = "form-group">
+							<label>Street</label>
+							<input type="text" value="<%= @certificate.customer.street%>" class="form-control" readonly>
+							<label>City</label>
+							<input type="text" value="<%= @certificate.customer.city%>" class="form-control" readonly>
+							<label>State</label>
+							<input type="text" value="<%= @certificate.customer.state%>" class="form-control" readonly>
+
+							<label>Zip</label>
+							<input type="text" value="<%= @certificate.customer.zip%>" class="form-control" readonly>
+				
+						</div>
+						
+				<%= form_for(@certificate, :remote => true, class: 'form-horizontal', :html => { :id => "form_correct" }) do |f| %>
+					<fieldset>
+						
+						<div class = "form-group">
+							<%= f.label :account_number %>
+							<%= f.text_field :account_number, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+							<%= f.label :burglary %>
+							<%= f.check_box :burglary %>
+
+							<%= f.label :fire %>
+							<%= f.check_box :fire %>
+
+							<%= f.label :panic %>
+							<%= f.check_box :panic %>
+
+							<%= f.label :hold_up %>
+							<%= f.check_box :hold_up %>
+						</div>
+
+						<div class = "form-group">
+							<%= f.label "Start Date YYYY-MM-DD" %>
+							<%= f.text_field :start_date, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+							<%= f.label "Renewal Date YYYY-MM-DD" %>
+							<%= f.text_field :renewal_date, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+							<%= f.label :fax %>
+							<%= f.text_field :fax, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+							<%= f.label :attention %>
+							<%= f.text_field :attention, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+							<%= f.submit("Update", class: "btn btn-primary btn-sm", :id => "action") %>
+						</div>
+					</fieldset>
+				<% end %> 
+		</div>
+	</div>
+</div>

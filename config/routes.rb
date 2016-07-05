@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'certificates/index'
+
+  get 'certificates/new'
+
   get 'integrations/index'
 
   get 'integrations/index'
@@ -22,7 +26,7 @@ Rails.application.routes.draw do
   get 'jobs/todays_jobs', to: 'jobs#todays_jobs', as: 'show_todays_jobs'
   resources :jobs
 
-  post 'jobs/:id/create', to: 'jobs#create', as: 'create_job'
+  get 'jobs/:id/create', to: 'jobs#create', as: 'create_job'
   
 
   get 'jobs/:id/jobs', to: 'jobs#jobs', as: 'customer_job'
@@ -44,6 +48,11 @@ Rails.application.routes.draw do
   resources :forms
 
   get 'api', to:'api#index', as: 'api'
+
+  resources :certificates
+  get 'certificates/:id/create', to: 'certificates#create', as: 'create_certificate'
+  get 'certificates/:id/certificates', to: 'certificates#certificates', as: 'customer_certificates'
+  get 'certificates/:id/view', to: 'certificates#view', as: 'view_certificate'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

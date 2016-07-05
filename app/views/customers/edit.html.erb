@@ -77,3 +77,10 @@
 		</div>
 	</div>
 </div>
+
+<footer>
+	<ul id="footer-buttons"> 
+		<li><%= link_to("Create Insurance Certificate", create_certificate_path(@customer), data:{confirm: 'Are you sure?'}, class: "btn btn-primary btn-md") %></li>
+		<li><td><%= link_to "Certificates", customer_certificates_path(@customer), class: "btn btn-primary btn-md" %></li>
+    </ul>
+</footer>

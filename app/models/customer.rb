@@ -7,4 +7,5 @@ class Customer < ActiveRecord::Base
 	validates :fax, format: {with: /\A(^$|([0-9]{3,3}-[0-9]{3,3}-[0-9]{4,4})(\sext\s\d*)?)/, message: "Only allow valid fax number" }
 	
 	has_many :jobs, dependent: :destroy
+	has_many :certificates, dependent: :destroy
 end

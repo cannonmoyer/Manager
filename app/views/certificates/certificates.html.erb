@@ -1,0 +1,16 @@
+<center><h1>Certificates</h1></center>
+
+<table class="table table-bordered">
+	<tr>
+		<th width="25">I.D.</th>  
+		<th>Account #</th>
+		<th width="10">View</th>
+	</tr>	
+	<% @certificates.each do |f| %>
+		<tr>
+			<td><%= f.id %></td>
+			<td><%= f.account_number %></td>	
+			<td><%= link_to "", view_certificate_path(f),  class: "glyphicon glyphicon-pencil" %></td>	
+		</tr>
+	<% end %>
+</table>

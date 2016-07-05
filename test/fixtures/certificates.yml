@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  burglary: false
+  fire: false
+  panic: false
+  hold_up: false
+  account_number: MyString
+  start_date: 2016-06-29
+  renewal_date: 2016-06-29
+  fax: MyString
+  attention: MyString
+
+two:
+  burglary: false
+  fire: false
+  panic: false
+  hold_up: false
+  account_number: MyString
+  start_date: 2016-06-29
+  renewal_date: 2016-06-29
+  fax: MyString
+  attention: MyString
