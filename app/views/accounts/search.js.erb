@@ -1,0 +1,2 @@
+$("#accounts-table > tbody").html("");
+$("<%= escape_javascript(render @accounts) %>").appendTo("#accounts-table");

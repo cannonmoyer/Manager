@@ -1,0 +1,18 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-2">
+			<input id="account-search" type="text" name="Search" placeholder="Search"><br>
+			<h1>Accounts</h1>
+
+			<table class="table table-bordered" id="accounts-table">
+				<thead>
+					<th>I.D.</th> <th>Line Number</th> <th>Number</th> <th>Name</th>  
+				</thead>
+				<tbody>
+					<%= render @accounts %>
+				</tbody>	
+			</table>
+		</div>
+	</div>
+</div>
+<%= link_to "Create Account Numbers", new_account_path, class: "btn btn-primary btn-sm" %>

@@ -8,7 +8,7 @@ class CertificatesController < ApplicationController
 				Date.parse(params[:certificate][:start_date]) unless params[:certificate][:start_date] == ""
 				Date.parse(params[:certificate][:renewal_date]) unless params[:certificate][:renewal_date] == ""
 				@certificate = Certificate.find(params[:id])	
-				@certificate.update(params.require(:certificate).permit(:burlgary, :fire, :panic, :hold_up, :account_number, :start_date, :renewal_date, :fax, :attention))
+				@certificate.update!(params.require(:certificate).permit(:burglary, :fire, :panic, :hold_up, :account_number, :start_date, :renewal_date, :to, :attention))
 				
 				if @certificate.valid?
 					flash[:notice] = "Successfully Updated Certificate"
@@ -27,7 +27,12 @@ class CertificatesController < ApplicationController
   end
 
   def edit
-  	@certificate = Certificate.find(params[:id])
+  	user = User.find(current_user)
+  	if user.level == "Admin"
+  		@certificate = Certificate.find(params[:id])
+  	else
+			redirect_to show_todays_jobs_path
+	end
   end
 
   def create
@@ -44,11 +49,21 @@ class CertificatesController < ApplicationController
 	end
 
 	def certificates
-		customer = Customer.find(params[:id])
-		@certificates = customer.certificates.all
+		user = User.find(current_user)
+		if user.level == "Admin"
+			customer = Customer.find(params[:id])
+			@certificates = customer.certificates.all
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 
 	def view
-		@certificate = Certificate.find(params[:id])
+		user = User.find(current_user)
+		if user.level == "Admin"
+			@certificate = Certificate.find(params[:id])
+		else
+			redirect_to show_todays_jobs_path
+		end
 	end
 end

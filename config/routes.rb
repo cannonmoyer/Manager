@@ -53,6 +53,10 @@ Rails.application.routes.draw do
   get 'certificates/:id/create', to: 'certificates#create', as: 'create_certificate'
   get 'certificates/:id/certificates', to: 'certificates#certificates', as: 'customer_certificates'
   get 'certificates/:id/view', to: 'certificates#view', as: 'view_certificate'
+
+  resources :accounts
+  match "/accounts/:keyword/search" => "accounts#search", via: :get
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

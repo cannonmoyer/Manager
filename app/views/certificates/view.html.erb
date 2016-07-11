@@ -19,10 +19,33 @@
 			<h4>Address: <%= @certificate.customer.street %> <%= @certificate.customer.city %>, <%= @certificate.customer.state %> <%= @certificate.customer.zip %></h4>
 			<h3><b>Monitoring</b></h3>
 			<h5>Account Number: <%= @certificate.account_number %></h5>
-			Burglary <input type="checkbox" checked="<% @certificate.burglary %>"> 
-			Fire <input type="checkbox" checked="<% @certificate.fire %>"> 
-			Panic Buttons (Fire, Police, Medic, Durress) <input type="checkbox" checked="<% @certificate.panic %>"> 
-			Hold Up <input type="checkbox" checked="<% @certificate.hold_up %>">
+			<h5>Start Date: <%= @certificate.start_date %></h5>
+			<h5>Renewal Date <%= @certificate.renewal_date %></h5>
+			<% if @certificate.burglary == true %>
+				Burglary <input type="checkbox" disabled="disabled" checked/>
+			<% else %>
+				Burglary <input type="checkbox" disabled="disabled"/>
+			<% end %> 
+
+			<% if @certificate.fire == true %>
+				Fire <input type="checkbox" disabled="disabled" checked/> 
+			<% else %>
+				Fire <input type="checkbox" disabled="disabled"/>
+			<% end %> 
+
+			<% if @certificate.panic == true %>
+				Panic Buttons (Fire, Police, Medic, Durress) <input type="checkbox" disabled="disabled" checked/>
+			<% else %>
+				Panic Buttons (Fire, Police, Medic, Durress) <input type="checkbox" disabled="disabled"/>
+			<% end %> 
+
+
+			<% if @certificate.hold_up == true %>
+				Hold Up <input type="checkbox" disabled="disabled" checked/>
+			<% else %>
+				Hold Up <input type="checkbox" disabled="disabled"/>
+			<% end %> 
+			
 			<br>
 			<h3><b>Central Station</b></h3>
 			<p style="font-size:150%">Sentrynet<br>
@@ -33,11 +56,9 @@
 			<p style="font-size:150%">The Final Touch Security, LLC<br>
 			1250 McIngvale Rd.<br> 
 			Hernando, MS 38632</p>
-
+			
 			<br>
-			Created At: <%= @certificate.created_at %>
-			<br>
-			Fax: <%= @certificate.fax %>
+			To: <%= @certificate.to %>
 			<br>
 			<b>Attention:</b> <%= @certificate.attention %>
 		</div>
