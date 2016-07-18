@@ -18,6 +18,8 @@ class CustomersController < ApplicationController
 		user = User.find(current_user)
 		if user.level == "Admin"
 			@customer = Customer.find(params[:id])
+			@message = Message.new
+			session[:customer_message] = @customer.id
 		else
 			redirect_to show_todays_jobs_path
 		end
@@ -31,7 +33,8 @@ class CustomersController < ApplicationController
 			
 			if @customer.valid?
 				flash[:notice] = "Successfully Updated Customer"
-				render :js => "window.location = '/customers'"
+				render "layouts/success"
+				#render :js => "window.location = '/customers'"
 			else
 				flash[:error] = "Error Updating Customer"
 				render "layouts/fail"

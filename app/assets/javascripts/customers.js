@@ -18,3 +18,10 @@ $(document).ready(function(){
     );//end click
 });//end doc
 
+$(document).ready(function(){
+    $("#form_correctTwo").submit(function(){
+    	$("#actionTwo").prop('disabled', true);
+    	}
+    );//end click
+});//end doc
+

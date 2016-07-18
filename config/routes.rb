@@ -19,7 +19,9 @@ Rails.application.routes.draw do
   get 'manage_users/:id/edit', to: 'manage_users#edit', as: 'user'
   post 'manage_users', to: 'manage_users#create'
   patch 'manage_users/:id/edit', to: 'manage_users#update'
+
   resources :customers
+
 
   match "/jobs/:keyword/search" => "jobs#search", via: :get
   get 'jobs/active_jobs', to: 'jobs#active_jobs', as: 'show_active_jobs'
@@ -57,6 +59,9 @@ Rails.application.routes.draw do
   resources :accounts
   match "/accounts/:keyword/search" => "accounts#search", via: :get
   
+  #get 'messages/:id/new', to: 'messages#new', as: 'new_message'
+  resources :messages
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
