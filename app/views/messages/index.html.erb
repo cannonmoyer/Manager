@@ -1,17 +1,16 @@
 <center><h1>Messages</h1></center>
 
 <table class="table table-bordered">
-	<tr>
 		<th>Created At</th> <th>Name</th> <th>Phone</th> <th>Description</th> <th width="10">Edit</th> <th width="10">Delete</th> 
-	<% @messages.each do |f| %>
-		<tr>
-			<td><%= f.created_at %></td>
-			<td><%= f.customer.name %></td>
-			<td><%= f.customer.phone_one %></td>
-			<td><%= f.description %></td>
-			<td><%= link_to "", edit_message_path(f), class: "glyphicon glyphicon-pencil" %> </td>
-			<td><%= link_to "", message_path(f), data:{confirm: 'Are you sure?'}, class: "glyphicon glyphicon-trash",  method: :delete %></td>
-		</tr>
-	<% end %>
+		<% @messages.each do |f| %>
+			<tr>
+				<td><%= f.created_at %></td>
+				<td><%= f.customer.name %></td>
+				<td><%= f.customer.phone_one %></td>
+				<td><%= f.description %></td>
+				<td><%= link_to "", edit_message_path(f), class: "glyphicon glyphicon-pencil" %> </td>
+				<td><%= link_to "", message_path(f), data:{confirm: 'Are you sure?'}, class: "glyphicon glyphicon-trash",  method: :delete %></td>
+			</tr>
+		<% end %>
 </table>
 
