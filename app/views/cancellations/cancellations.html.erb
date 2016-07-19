@@ -1,0 +1,20 @@
+<center><h1>Cancellations</h1></center>
+
+<table class="table table-bordered">
+	<tr>
+		<th width="25">I.D.</th>  
+		<th>Account #</th>
+		<th width="10">View</th>
+		<th width="10">Edit</th>
+		<th width="10">Delete</th>
+	</tr>	
+	<% @cancellations.each do |f| %>
+		<tr>
+			<td><%= f.id %></td>
+			<td><%= f.account_number %></td>	
+			<td><%= link_to "", view_cancellation_path(f),  class: "glyphicon glyphicon-eye-open" %></td>	
+			<td><%= link_to "", edit_cancellation_path(f),  class: "glyphicon glyphicon-pencil" %></td>
+			<td><%= link_to "", cancellation_path(f), data:{confirm: 'Are you sure?'},  class: "glyphicon glyphicon-trash", method: :delete %></td>
+		</tr>
+	<% end %>
+</table>

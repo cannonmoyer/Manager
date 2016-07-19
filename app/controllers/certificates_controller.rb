@@ -66,4 +66,19 @@ class CertificatesController < ApplicationController
 			redirect_to show_todays_jobs_path
 		end
 	end
+
+	def destroy
+		user = User.find(current_user)
+		if user.level == "Admin"
+			certificate = Certificate.find(params[:id])
+			customer = certificate.customer.id
+			certificate.destroy
+			redirect_to customer_certificates_path(customer)
+		else
+			redirect_to show_todays_jobs_path
+		end
+	end
+
 end
+
+

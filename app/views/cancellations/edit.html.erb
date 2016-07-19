@@ -1,0 +1,88 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<h2>Edit Form</h2>
+					<div class = "form-group">
+						<label>Name</label>
+						<input type="text" value="<%= @cancellation.customer.name%>" class="form-control" readonly>
+					</div>
+					<div class = "form-group">
+						<label>Street</label>
+						<input type="text" value="<%= @cancellation.customer.street%>" class="form-control" readonly>
+						<label>City</label>
+						<input type="text" value="<%= @cancellation.customer.city%>" class="form-control" readonly>
+						<label>State</label>
+						<input type="text" value="<%= @cancellation.customer.state%>" class="form-control" readonly>
+
+						<label>Zip</label>
+						<input type="text" value="<%= @cancellation.customer.zip%>" class="form-control" readonly>
+				
+					</div>
+						
+				<%= form_for(@cancellation, :remote => true, class: 'form-horizontal', :html => { :id => "form_correct" }) do |f| %>
+					<fieldset>
+						
+						<div class = "form-group">
+							<%= f.label "Date yyyy-mm-dd" %>
+							<%= f.text_field :date, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+							<%= f.label :account_number %>
+							<%= f.text_field :account_number, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+							<%= f.label "Start Date YYYY-MM-DD" %>
+							<%= f.text_field :start_date, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+							<%= f.label "Renewal Date YYYY-MM-DD" %>
+							<%= f.text_field :renewal_date, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+							<%= f.label :landline_monitoring %>&nbsp;(# of months) *4.17
+							<%= f.text_field :landline_monitoring, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+							<%= f.label :cell_monitoring %>&nbsp;(# of months) *5.95
+							<%= f.text_field :cell_monitoring, class: "form-control" %>
+						</div>
+
+						<div class = "form-group">
+							<%= f.label :verified_cancellation %>
+							<%= f.check_box :verified_cancellation %>
+							&nbsp;
+							<%= f.label :cancel_pink %>
+							<%= f.check_box :cancel_pink %>
+							&nbsp;
+							<%= f.label :cleared_account_balance %>
+							<%= f.check_box :cleared_account_balance %>
+							&nbsp;
+							<%= f.label :remove_from_mem_tx %>
+							<%= f.check_box :remove_from_mem_tx %>
+							&nbsp;
+							<%= f.label :cancel_insurance %>
+							<%= f.check_box :cancel_insurance %>
+							&nbsp;
+							<%= f.label :note_customer_account %>
+							<%= f.check_box :note_customer_account %>
+							&nbsp;
+							<%= f.label :cell_radio %>
+							<%= f.check_box :cell_radio %>
+							&nbsp;
+							<%= f.label :cancel_cell_radio %>
+							<%= f.check_box :cancel_cell_radio %>
+						</div>
+
+						<div class = "form-group">
+							<%= f.submit("Update", class: "btn btn-primary btn-sm", :id => "action") %>
+						</div>
+					</fieldset>
+				<% end %> 
+		</div>
+	</div>
+</div>

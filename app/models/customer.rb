@@ -9,4 +9,5 @@ class Customer < ActiveRecord::Base
 	has_many :jobs, dependent: :destroy
 	has_many :certificates, dependent: :destroy
 	has_many :messages, dependent: :destroy
+	has_many :cancellations, dependent: :destroy
 end

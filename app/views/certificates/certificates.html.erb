@@ -5,12 +5,16 @@
 		<th width="25">I.D.</th>  
 		<th>Account #</th>
 		<th width="10">View</th>
+		<th width="10">Edit</th>
+		<th width="10">Delete</th>
 	</tr>	
 	<% @certificates.each do |f| %>
 		<tr>
 			<td><%= f.id %></td>
 			<td><%= f.account_number %></td>	
-			<td><%= link_to "", view_certificate_path(f),  class: "glyphicon glyphicon-pencil" %></td>	
+			<td><%= link_to "", view_certificate_path(f),  class: "glyphicon glyphicon-eye-open" %></td>		
+			<td><%= link_to "", edit_certificate_path(f),  class: "glyphicon glyphicon-pencil" %></td>
+			<td><%= link_to "", certificate_path(f), data:{confirm: 'Are you sure?'},  class: "glyphicon glyphicon-trash", method: :delete %></td>
 		</tr>
 	<% end %>
 </table>

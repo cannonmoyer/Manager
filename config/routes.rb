@@ -61,7 +61,10 @@ Rails.application.routes.draw do
   
   #get 'messages/:id/new', to: 'messages#new', as: 'new_message'
   resources :messages
-
+  resources :cancellations
+  get 'cancellations/:id/create', to: 'cancellations#create', as: 'create_cancellation'
+  get 'cancellations/:id/cancellations', to: 'cancellations#cancellations', as: 'customer_cancellations'
+  get 'cancellations/:id/view', to: 'cancellations#view', as: 'view_cancellation'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

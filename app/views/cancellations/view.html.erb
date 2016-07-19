@@ -1,0 +1,44 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+		
+			<img id="form_logo" alt="Treadmill Doctor Inc." src="/images/logo.bmp">
+
+			<h1>662-429-0653</h1>
+
+			
+		</div>
+
+	</div>
+	<center><h2><b>Certificate of Cancellation</b></h2></center>
+	
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+		
+			<h4>Name: <%= @cancellation.customer.name %></h4>
+			<h4>Address: <%= @cancellation.customer.street %> <%= @cancellation.customer.city %>, <%= @cancellation.customer.state %> <%= @cancellation.customer.zip %></h4>
+			<h4>Date: <%= @cancellation.date %></h4>
+			<h4>Account Number: <%= @cancellation.account_number %></h4>
+			<h4>Start Date (setup date): <%= @cancellation.start_date %></h4>
+			<h4>Renewal Date <%= @cancellation.renewal_date %></h4>
+
+			<h3><b>Credit</b></h3>
+			<% if @cancellation.landline_monitoring > 0 %>
+				<p style="font-size:160%;">Basic Monitoring - <%= @cancellation.landline_monitoring %> months X $4.17 = $<%= ((@cancellation.landline_monitoring * 4.17) * 100).round / 100.0 %></p>
+			<% end %>
+			<% if @cancellation.cell_monitoring > 0 %>
+				<p style="font-size:160%;">Cell Unit Monitoring - <%= @cancellation.cell_monitoring %> months X $5.95 = $<%= ((@cancellation.cell_monitoring * 5.95) * 100).round / 100.0 %></p>
+			<% end %>
+			<br>
+			<h3><b>Central Station</b></h3>
+			<p style="font-size:150%">Sentrynet<br>
+			1341 Sycamore View Rd, Suite 300 <br> 
+			Memphis, TN 38134</p>
+
+			<h3><b>Installed By</b></h3>
+			<p style="font-size:150%">The Final Touch Security, LLC<br>
+			1250 McIngvale Rd.<br> 
+			Hernando, MS 38632</p>
+		</div>
+	</div>
+</div>

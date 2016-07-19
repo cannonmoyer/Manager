@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2016-07-19
+  account_number: MyString
+  start_date: 2016-07-19
+  renewal_date: 2016-07-19
+  sent_date: 2016-07-19
+  landline_monitoring: 1.5
+  cell_monitoring: 1.5
+  verified_cancellation: false
+  to: MyString
+  cancel_pink: false
+  cleared_account_balance: false
+  remove_from_mem_tx: false
+  cancel_insurance: false
+  note_customer_account: false
+  cell_radio: false
+  cancel_cell_radio: false
+
+two:
+  date: 2016-07-19
+  account_number: MyString
+  start_date: 2016-07-19
+  renewal_date: 2016-07-19
+  sent_date: 2016-07-19
+  landline_monitoring: 1.5
+  cell_monitoring: 1.5
+  verified_cancellation: false
+  to: MyString
+  cancel_pink: false
+  cleared_account_balance: false
+  remove_from_mem_tx: false
+  cancel_insurance: false
+  note_customer_account: false
+  cell_radio: false
+  cancel_cell_radio: false

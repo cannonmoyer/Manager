@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718175621) do
+ActiveRecord::Schema.define(version: 20160719193616) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "line_number"
@@ -21,13 +21,27 @@ ActiveRecord::Schema.define(version: 20160718175621) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "call_lists", force: :cascade do |t|
-    t.string   "name"
-    t.string   "phone"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  create_table "cancellations", force: :cascade do |t|
+    t.date     "date"
+    t.string   "account_number"
+    t.date     "start_date"
+    t.date     "renewal_date"
+    t.integer  "landline_monitoring"
+    t.integer  "cell_monitoring"
+    t.boolean  "verified_cancellation"
+    t.boolean  "cancel_pink"
+    t.boolean  "cleared_account_balance"
+    t.boolean  "remove_from_mem_tx"
+    t.boolean  "cancel_insurance"
+    t.boolean  "note_customer_account"
+    t.boolean  "cell_radio"
+    t.boolean  "cancel_cell_radio"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "customer_id"
   end
+
+  add_index "cancellations", ["customer_id"], name: "index_cancellations_on_customer_id"
 
   create_table "certificates", force: :cascade do |t|
     t.boolean  "burglary"
