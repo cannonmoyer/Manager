@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
 	def index
 		user = User.find(current_user)
 		if user.level == "Admin"
-			@messages = Message.all.order("created_at ASC")
+			@messages = Message.where(status: ['Message', nil]).all.order("created_at ASC")
 		else
 			redirect_to show_todays_jobs_path
 		end
@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
 		user = User.find(current_user)
 		customer = Customer.find(session[:customer_message])
 		if user.level == "Admin"
-			m = customer.messages.create(params.require(:message).permit(:description))	
+			m = customer.messages.create(params.require(:message).permit(:description, :status))	
 			if m.valid?
 				flash[:notice] = "Successfully Created Message"
 				render :js => "window.location = '/customers'"
@@ -43,7 +43,7 @@ class MessagesController < ApplicationController
 		if user.level == "Admin"
 
 			@message = Message.find(params[:id])	
-			@message.update(params.require(:message).permit(:description))
+			@message.update(params.require(:message).permit(:description, :status))
 
 			if @message.valid?
 				flash[:notice] = "Successfully Updated Message"

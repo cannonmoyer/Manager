@@ -104,6 +104,7 @@ class JobsController < ApplicationController
 		if user.level == "Admin"
 			@customer = Customer.find(params[:id])
 			@jobs = @customer.jobs.all.order("date ASC").order("time ASC")
+			@messages = @customer.messages.where(status: "Note").all.order("created_at ASC")
 		else
 			redirect_to show_todays_jobs_path
 		end
