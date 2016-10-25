@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
   get 'jobs/:id/user_jobs', to: 'jobs#user_jobs', as: 'user_job'
 
+  get 'jobs/:id/customer_jobs', to: 'jobs#customer_jobs', as: 'customer_account_jobs'
  
 
   resources :call_lists
@@ -60,6 +61,8 @@ Rails.application.routes.draw do
   match "/accounts/:keyword/search" => "accounts#search", via: :get
   
   #get 'messages/:id/new', to: 'messages#new', as: 'new_message'
+
+  get 'messages/:id/create_job', to: 'messages#create_job', as: 'create_message_job'
   resources :messages
   resources :cancellations
   get 'cancellations/:id/create', to: 'cancellations#create', as: 'create_cancellation'

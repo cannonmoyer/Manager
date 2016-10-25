@@ -29,6 +29,21 @@ class MessagesController < ApplicationController
 		end
 	end
 
+	def create_job
+		u = User.find(current_user)
+		if u.level == "Admin"
+			@message = Message.find(params[:id])
+			@message.update(status: "Note")
+			@customer = @message.customer
+			@job = @customer.jobs.create(status:'Waiting To Be Scheduled', description: @message.description)
+			@job.user = u
+			@job.save!
+			redirect_to edit_job_path(@job)
+		else
+			redirect_to show_todays_jobs_path
+		end
+	end
+
 	def edit
 		user = User.find(current_user)
 		if user.level == "Admin"
@@ -43,7 +58,7 @@ class MessagesController < ApplicationController
 		if user.level == "Admin"
 
 			@message = Message.find(params[:id])	
-			@message.update(params.require(:message).permit(:description, :status))
+			@message.update(params.require(:message).permit(:description, :status, :new_customer))
 
 			if @message.valid?
 				flash[:notice] = "Successfully Updated Message"

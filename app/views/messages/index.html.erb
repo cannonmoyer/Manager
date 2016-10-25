@@ -1,16 +1,35 @@
 <center><h1>Messages</h1></center>
 
 <table class="table table-bordered">
-		<th>Created At</th> <th>Name</th> <th>Phone</th> <th>Description</th> <th width="10">Edit</th> <th width="10">Delete</th> 
+		<th>Created At</th> 
+		<th>Name</th> 
+		<th>City</th> 
+		<th>Phone</th> 
+		<th>Description</th> 
+		<th width="10">To Job</th> 
+		<th width="10">Edit Customer</th> 
+		<th width="10">Edit</th> 
+		<th width="10">Delete</th> 
+		
 		<% @messages.each do |f| %>
+			<% if f.new_customer? %>
+			<tr bgcolor="#6495ED">
+			<% else %>
 			<tr>
+			<% end %>
 				<td><%= f.created_at %></td>
 				<td><%= f.customer.name %></td>
+				<td><%= f.customer.city %></td>
 				<td><%= f.customer.phone_one %></td>
 				<td><%= f.description %></td>
+				<td><%= link_to "", create_message_job_path(f), class: "glyphicon glyphicon-chevron-right" %> </td>
+				<td><%= link_to "", edit_customer_path(f.customer), class: "glyphicon glyphicon-user" %> </td>
 				<td><%= link_to "", edit_message_path(f), class: "glyphicon glyphicon-pencil" %> </td>
 				<td><%= link_to "", message_path(f), data:{confirm: 'Are you sure?'}, class: "glyphicon glyphicon-trash",  method: :delete %></td>
 			</tr>
 		<% end %>
 </table>
+
+
+
 

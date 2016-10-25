@@ -13,6 +13,10 @@
 							<%= f.select :status, ['Message','Note'], class: "form-control"%>
 						</div>
 						<div class = "form-group">
+							<%= f.label :new_customer %>
+							<%= f.check_box :new_customer %>
+						</div>
+						<div class = "form-group">
 							<%= f.submit(class: "btn btn-primary btn-sm", :id => "action") %>
 						</div>
 					</fieldset>
