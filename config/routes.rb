@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   post 'manage_users', to: 'manage_users#create'
   patch 'manage_users/:id/edit', to: 'manage_users#update'
 
+  match "/customers/:keyword/search" => "customers#search", via: :get
   resources :customers
 
 

@@ -1,0 +1,2 @@
+$("#customers > tbody").html("");
+$("<%= escape_javascript(render @customers) %>").appendTo("#customers");

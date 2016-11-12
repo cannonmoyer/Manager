@@ -1,14 +1,28 @@
 class CustomersController < ApplicationController
 	before_action :authenticate_user!
 	
+	def search
+		k = params[:keyword].downcase
+		if k == "empty"
+			@customers = Customer.order("name ASC").limit(50)
+		else
+			@customers = []
+			Customer.all.each do |c|
+				if c.name != nil and c.name.downcase.include? k
+					@customers << c
+				end
+			end
+		end
+		respond_to do |format|
+			format.html {redirect_to customers_url}
+			format.js {}
+		end
+	end
+
 	def index
 		user = User.find(current_user)
 		if user.level == "Admin"
-			respond_to do |format|
-	      		format.html
-		      	#format.json {render json: ReminderDatatable.new(view_context)}
-		      	format.json {render json: CustomerDatatable.new(view_context)}
-		    end
+			@customers = Customer.order("name ASC").limit(50)
 		else
 			redirect_to show_todays_jobs_path
 		end

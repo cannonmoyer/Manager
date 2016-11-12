@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -39,9 +38,8 @@ ActiveRecord::Schema.define(version: 20161025003944) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "customer_id"
+    t.index ["customer_id"], name: "index_cancellations_on_customer_id"
   end
-
-  add_index "cancellations", ["customer_id"], name: "index_cancellations_on_customer_id"
 
   create_table "certificates", force: :cascade do |t|
     t.boolean  "burglary"
@@ -56,9 +54,8 @@ ActiveRecord::Schema.define(version: 20161025003944) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "customer_id"
+    t.index ["customer_id"], name: "index_certificates_on_customer_id"
   end
-
-  add_index "certificates", ["customer_id"], name: "index_certificates_on_customer_id"
 
   create_table "customers", force: :cascade do |t|
     t.string   "name"
@@ -102,10 +99,9 @@ ActiveRecord::Schema.define(version: 20161025003944) do
     t.integer  "user_id"
     t.integer  "time"
     t.boolean  "time_sensitive"
+    t.index ["customer_id"], name: "index_jobs_on_customer_id"
+    t.index ["user_id"], name: "index_jobs_on_user_id"
   end
-
-  add_index "jobs", ["customer_id"], name: "index_jobs_on_customer_id"
-  add_index "jobs", ["user_id"], name: "index_jobs_on_user_id"
 
   create_table "messages", force: :cascade do |t|
     t.text     "description"
@@ -114,9 +110,8 @@ ActiveRecord::Schema.define(version: 20161025003944) do
     t.integer  "customer_id"
     t.string   "status"
     t.boolean  "new_customer"
+    t.index ["customer_id"], name: "index_messages_on_customer_id"
   end
-
-  add_index "messages", ["customer_id"], name: "index_messages_on_customer_id"
 
   create_table "pages", force: :cascade do |t|
     t.text     "content"
@@ -124,9 +119,8 @@ ActiveRecord::Schema.define(version: 20161025003944) do
     t.datetime "updated_at", null: false
     t.integer  "job_id"
     t.string   "name"
+    t.index ["job_id"], name: "index_pages_on_job_id"
   end
-
-  add_index "pages", ["job_id"], name: "index_pages_on_job_id"
 
   create_table "receipts", force: :cascade do |t|
     t.text     "information"
@@ -134,9 +128,8 @@ ActiveRecord::Schema.define(version: 20161025003944) do
     t.datetime "updated_at",  null: false
     t.integer  "job_id"
     t.string   "email"
+    t.index ["job_id"], name: "index_receipts_on_job_id"
   end
-
-  add_index "receipts", ["job_id"], name: "index_receipts_on_job_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -152,9 +145,8 @@ ActiveRecord::Schema.define(version: 20161025003944) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "level"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

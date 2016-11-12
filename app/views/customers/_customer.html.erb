@@ -1,0 +1,10 @@
+<tr>
+	<td><%= customer.name %> </td>
+	<td><%= customer.company %></td>
+	<td><%= customer.account_number %></td>
+	<td><%= customer.phone_one %></td>
+	<td><%= link_to "", edit_customer_path(customer), class: "glyphicon glyphicon-pencil" %></td>
+	<td><%= link_to "", customer_path(customer), data:{confirm: 'Are you sure?'},  class: "glyphicon glyphicon-trash", method: :delete %></td>
+	<td><%= link_to "", create_job_path(customer), data:{confirm: 'Are you sure?'},  class: "glyphicon glyphicon-new-window" %></td>
+	<td><%= link_to "", customer_account_jobs_path(customer), class: "glyphicon glyphicon-search" %></td>
+</tr>
