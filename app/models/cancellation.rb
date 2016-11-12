@@ -1,4 +1,4 @@
-class Cancellation < ActiveRecord::Base
+class Cancellation < ApplicationRecord
 	validates :landline_monitoring, presence: true
 	validates :cell_monitoring, presence: true
 	validates :landline_monitoring, numericality: { greater_than_or_equal_to: 0 }

@@ -1,2 +1,2 @@
-class Form < ActiveRecord::Base
+class Form < ApplicationRecord
 end

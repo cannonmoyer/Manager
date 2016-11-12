@@ -1,4 +1,4 @@
-class Customer < ActiveRecord::Base
+class Customer < ApplicationRecord
 	validates :name, presence: true
 	validates :phone_one, format: {with: /\A(^$|([0-9]{3,3}-[0-9]{3,3}-[0-9]{4,4})(\sext\s\d*)?)/, message: "Only allow valid phone number" }
 	validates :phone_two, format: {with: /\A(^$|([0-9]{3,3}-[0-9]{3,3}-[0-9]{4,4})(\sext\s\d*)?)/, message: "Only allow valid phone number" }

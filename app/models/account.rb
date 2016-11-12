@@ -1,4 +1,4 @@
-class Account < ActiveRecord::Base
+class Account < ApplicationRecord
 	validates :line_number, presence: true
 	validates :number, presence: true
 	validates :number, numericality: { greater_than: 0 }

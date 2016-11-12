@@ -1,4 +1,4 @@
-class Job < ActiveRecord::Base
+class Job < ApplicationRecord
 	has_many :pages, dependent: :destroy
 	has_many :receipts, dependent: :destroy
 	
