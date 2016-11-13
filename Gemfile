@@ -5,6 +5,8 @@ gem 'test-unit', '~> 3.0'
 gem 'rails', '5.0.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
+#add puma web server
+gem 'puma'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
