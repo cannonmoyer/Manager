@@ -13,11 +13,10 @@
 		
 		<% @messages.each do |f| %>
 
-			<% if f.new_customer != nil and f.new_customer? %>
-				<tr bgcolor="#6495ED">
-			<% else %>
+			
+			
 			<tr>
-			<% end %>
+			
 				<td><%= f.created_at %></td>
 				<td><%= f.customer.name %></td>
 				<td><%= f.customer.city %></td>
