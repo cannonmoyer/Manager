@@ -12,8 +12,9 @@
 		<th width="10">Delete</th> 
 		
 		<% @messages.each do |f| %>
-			<% if f.new_customer? %>
-			<tr bgcolor="#6495ED">
+
+			<% if f.new_customer != nil and f.new_customer? %>
+				<tr bgcolor="#6495ED">
 			<% else %>
 			<tr>
 			<% end %>
