@@ -32,9 +32,9 @@ gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.6'
 
 #datatables gems
-gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
-gem 'ajax-datatables-rails'
-gem 'kaminari'
+#gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+#gem 'ajax-datatables-rails'
+#gem 'kaminari'
 
 #extra turbo link
 gem 'jquery-turbolinks'
